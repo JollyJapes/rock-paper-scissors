@@ -9,10 +9,12 @@
 
     <script>
 
-        let playerSelection = window.prompt("Welcome to RPS V1.03. Please input Rock, Paper or Scissors to play");
+        let playerSelection = window.prompt(`Welcome to RPS V1.09.
+Please input Rock, Paper or Scissors to play`);
         let computerSelection = computerPlay();
         let resultString = playRound(playerSelection, computerSelection);
         console.log(resultString);
+        console.log(-2 % 3);
 
 
         function computerPlay(){
@@ -37,7 +39,7 @@
             let playerNum = convertRPSToNum(playerSelection);
             let result;
             (playerNum == computerSelection) ? result = "Draw" :
-            ((playerNum - computerSelection) %2 ) ? result = "Lose" : result = "Win";
+            ((playerNum + 3 - computerSelection) %3 == 1) ? result = "Win" : result = "Lose";
             return result;
         }
 
@@ -45,9 +47,9 @@
             playerSelection = playerSelection.toLowerCase();
             playerSelection = capitaliseFirst(playerSelection);
             let result = checkResult(playerSelection, computerSelection);
-            let comparisonString = (result == "Win") ? "Beats" :
-                                   (result == "Draw") ? "Matches" : "Beaten by"
-            return `You ${result}! ${playerSelection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
+            let comparisonString = (result == "Win") ? "beats" :
+                                   (result == "Draw") ? "matches" : "beaten by"
+            return `You ${result.toLowerCase()}! ${playerSelection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
         }
 
         function capitaliseFirst (inputString){
