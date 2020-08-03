@@ -7,5 +7,57 @@
 
 <body>
 
+    <script>
+
+        window.alert("Welcome to RPS V1.00");
+        let playerSelection = window.pronpt("Let's play! Rock, Paper or Scissors?");
+        let computerSelection = computerPlay();
+        let resultString = playRound(playerSelection, Computerselection);
+        window.alert(resultString);
+
+
+        function computerPlay(){
+            return math.floor(math.random()*3);             
+        }
+        
+        function convertNumToRPS(num){
+            let rps = (num == 0) ? "Rock" :
+                (num == 1) ? "Paper" :
+                (num == 2) ? "Scissors" : "RPS Error" ;
+            return rps;    
+        }    
+
+        function convertRPSToNum(rps){
+            let num = (rps == "Rock") ? 0 :
+                (rps == "Paper") ? 1 :
+                (rps == "Scissors") ? 2 : "RPS Error 2" ;
+            return num;    
+        }    
+
+        function checkResult(playerSelection, computerSelection){
+            let playerNum = convertRPSToNum(playerSelection);
+            let result;
+            (playerNum == computerSelection) ? result = "Draw" :
+            ((playerNum - computerSelection) %2 ) ? result = "Win" : result = "Lose";
+            return result;
+        }
+
+        function playRound (playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            playerSelection = capitaliseFirst(playerSelection);
+            let result = checkResult(playerSelection, computerSelection);
+            let comparisonString = (result == "Win") ? "Beats" :
+                                   (result == "Draw") ? "Matches" : "Beaten by"
+            return `You ${result}! ${playerselection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
+        }
+
+        function capitaliseFirst (inputString){
+            let char = inputString[0].toUpperCase();
+            let outputString = char + inputString.slice(1);
+            return outputString;
+        }
+
+    </script>
+
 </body>
 </html>
