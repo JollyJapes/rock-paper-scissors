@@ -9,15 +9,14 @@
 
     <script>
 
-        window.alert("Welcome to RPS V1.00");
-        let playerSelection = pronpt("Let's play! Rock, Paper or Scissors?");
+        let playerSelection = window.prompt("Welcome to RPS V1.03. Please input Rock, Paper or Scissors to play");
         let computerSelection = computerPlay();
-        let resultString = playRound(playerSelection, Computerselection);
-        window.alert(resultString);
+        let resultString = playRound(playerSelection, computerSelection);
+        console.log(resultString);
 
 
         function computerPlay(){
-            return math.floor(math.random()*3);             
+            return Math.floor(Math.random()*3);             
         }
         
         function convertNumToRPS(num){
@@ -38,7 +37,7 @@
             let playerNum = convertRPSToNum(playerSelection);
             let result;
             (playerNum == computerSelection) ? result = "Draw" :
-            ((playerNum - computerSelection) %2 ) ? result = "Win" : result = "Lose";
+            ((playerNum - computerSelection) %2 ) ? result = "Lose" : result = "Win";
             return result;
         }
 
@@ -48,7 +47,7 @@
             let result = checkResult(playerSelection, computerSelection);
             let comparisonString = (result == "Win") ? "Beats" :
                                    (result == "Draw") ? "Matches" : "Beaten by"
-            return `You ${result}! ${playerselection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
+            return `You ${result}! ${playerSelection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
         }
 
         function capitaliseFirst (inputString){
