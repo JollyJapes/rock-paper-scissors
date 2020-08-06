@@ -9,13 +9,26 @@
 
     <script>
 
-        let playerSelection = window.prompt(`Welcome to RPS V1.09.
-Please input Rock, Paper or Scissors to play`);
-        let computerSelection = computerPlay();
-        let resultString = playRound(playerSelection, computerSelection);
-        console.log(resultString);
-        console.log(-2 % 3);
+        let playerScore = 0;
+        let computerScore = 0;
+        game(); 
 
+        function game(){
+            for (var i = 0; i< 5; i++ ) {
+                let playerSelectionRaw = window.prompt(`Welcome to best of five RPS V1.09.
+                        Round ${i+1} Please input Rock, Paper or Scissors to play`);
+                let playerSelection = fixCapitalisation(playerSelectionRaw);        
+                let computerSelection = computerPlay();
+                let resultString = playRound(playerSelection, computerSelection);
+                console.log(`Round ${i+1}: ${resultString}`);
+                let roundResult = checkResult(playerSelection, computerSelection);
+                if (roundResult == "Win") playerScore ++
+                else if (roundResult == "Lose") computerScore ++
+                }
+            let message = (playerScore > computerScore) ? "Congratulations! You win" :
+                          (playerScore < computerScore) ? "Bad luck! You lost" : "Tough Match, you draw"
+            console.log(`${message} ${playerScore} to ${computerScore}`)
+         }
 
         function computerPlay(){
             return Math.floor(Math.random()*3);             
@@ -44,15 +57,14 @@ Please input Rock, Paper or Scissors to play`);
         }
 
         function playRound (playerSelection, computerSelection) {
-            playerSelection = playerSelection.toLowerCase();
-            playerSelection = capitaliseFirst(playerSelection);
             let result = checkResult(playerSelection, computerSelection);
             let comparisonString = (result == "Win") ? "beats" :
                                    (result == "Draw") ? "matches" : "beaten by"
             return `You ${result.toLowerCase()}! ${playerSelection} ${comparisonString} ${convertNumToRPS(computerSelection)}` ;
         }
-
-        function capitaliseFirst (inputString){
+        
+        function fixCapitalisation (inputString){
+            inputString = inputString.toLowerCase();
             let char = inputString[0].toUpperCase();
             let outputString = char + inputString.slice(1);
             return outputString;
